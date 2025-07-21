@@ -6,9 +6,45 @@ const knightOffset = [
 ];
 
 function knightMoves(start, end) {
-    
+    let queue = [];
+    let visitedPositions = [];
+    let moves = getPotentialMoves(start);
+    if (moves.length > 0) {
+        queue.push(
+            {
+                x: ${moves[0][0]},
+                y: ${moves[0][1]},
+                distance: 1,
+                predecessor: { x: null, y: null }
+            }
+        )
+    }
+
+    while (queue.length > 0) {
+        let current = queue.shift();
+        if (current === end) {
+            // logic for getting the path
+
+        }
+        let currentMoves = getPotentialMoves(current);
+        if (currentMoves > 0) {
+            for (let i = 0; i < currentMoves.length; i++) {
+                let currMove = currentMoves[i];
+                queue.push(
+                    {
+                        x: ${currMove[0]},
+                        y: ${currMove[1]},
+                        distance: ${i + 2},
+                        predecessor: { x: currentMoves[i - 1][0], y: currentMoves[i - 1][1] }
+                    }                       
+                );
+            }
+        }
+    }
 }
 
+
+// return in correct form (object)
 function getPotentialMoves(position) {
     // get all legal moves for the knight 
     let legalMoves = [];
